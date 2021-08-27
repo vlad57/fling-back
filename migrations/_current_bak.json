@@ -1,0 +1,73 @@
+{
+    "tables": {
+        "user": {
+            "tableName": "user",
+            "schema": {
+                "id": {
+                    "allowNull": false,
+                    "primaryKey": true,
+                    "autoIncrement": true,
+                    "field": "id",
+                    "seqType": "Sequelize.INTEGER"
+                },
+                "email": {
+                    "unique": true,
+                    "field": "email",
+                    "seqType": "Sequelize.STRING"
+                },
+                "username": {
+                    "field": "username",
+                    "seqType": "Sequelize.STRING"
+                },
+                "firstname": {
+                    "field": "firstname",
+                    "seqType": "Sequelize.STRING"
+                },
+                "lastname": {
+                    "field": "lastname",
+                    "seqType": "Sequelize.STRING"
+                },
+                "phone": {
+                    "unique": true,
+                    "field": "phone",
+                    "seqType": "Sequelize.STRING"
+                },
+                "password": {
+                    "field": "password",
+                    "seqType": "Sequelize.STRING"
+                },
+                "isAuthPhone": {
+                    "field": "isAuthPhone",
+                    "seqType": "Sequelize.BOOLEAN"
+                },
+                "isAuthGoogle": {
+                    "field": "isAuthGoogle",
+                    "seqType": "Sequelize.BOOLEAN"
+                },
+                "isAuthFacebook": {
+                    "field": "isAuthFacebook",
+                    "seqType": "Sequelize.BOOLEAN"
+                },
+                "profileCompleted": {
+                    "field": "profileCompleted",
+                    "seqType": "Sequelize.BOOLEAN"
+                },
+                "createdAt": {
+                    "allowNull": false,
+                    "field": "createdAt",
+                    "seqType": "Sequelize.DATE"
+                },
+                "updatedAt": {
+                    "allowNull": false,
+                    "field": "updatedAt",
+                    "seqType": "Sequelize.DATE"
+                }
+            },
+            "indexes": []
+        }
+    },
+    "path": "/Users/vladislavvorobyev/Desktop/fling-back/migrations/_current.json",
+    "backupPath": "/Users/vladislavvorobyev/Desktop/fling-back/migrations/_current_bak.json",
+    "exists": true,
+    "revision": 4
+}
