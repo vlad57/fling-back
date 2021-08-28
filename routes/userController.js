@@ -49,7 +49,6 @@ module.exports = {
             const credential = firebase.auth.PhoneAuthProvider.credential(verificationId, code);
         
             firebase.auth().signInWithCredential(credential).then(r => {
-                console.log(r.additionalUserInfo.isNewUser);
                 if (r) {
                     if (!r.additionalUserInfo.isNewUser) {
                         return res.status(409).json({ 'error': 'This number is already used.' });
@@ -89,7 +88,6 @@ module.exports = {
               done(newUser);
           })
           .catch(function(err) {
-              console.log(err);
             return res.status(500).json({ 'error': 'cannot add user 1' });
           });
         }
@@ -161,8 +159,6 @@ module.exports = {
   oAuthGoogle: async function(req, res) {
     const code = req.query.code;
 
-    console.log(code);
-
     const { id_token, access_token } = await module.exports.getTokens({
       code,
       clientId: config.GOOGLE_CLIENT_ID,
@@ -215,7 +211,6 @@ module.exports = {
                     done(newUser);
                 })
                 .catch(function(err) {
-                  console.log(err);
                   return res.status(500).json({ 'error': 'cannot add user 1' });
                 });
               } else {
