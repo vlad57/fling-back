@@ -215,6 +215,7 @@ module.exports = {
                     done(newUser);
                 })
                 .catch(function(err) {
+                  console.log(err);
                   return res.status(500).json({ 'error': 'cannot add user 1' });
                 });
               } else {
@@ -230,7 +231,7 @@ module.exports = {
   
           ], function(newUser) {
             if (newUser) {
-              res.redirect(`${process.env['FRONT_ROOT_URI']}/${process.env['FRONT_ROUTE_LOGIN']}?userId=${userFound.id}&token=${jwtUtils.generateTokenForUser(userFound)}`);
+              res.redirect(`${process.env['FRONT_ROOT_URI']}/${process.env['FRONT_ROUTE_LOGIN']}?userId=${newUser.id}&token=${jwtUtils.generateTokenForUser(newUser)}`);
               /*return res.status(201).json({
                 'userId': newUser.id,
                 'token': jwtUtils.generateTokenForUser(newUser)

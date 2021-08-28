@@ -1,0 +1,25 @@
+version: '3.1'
+
+services:
+
+  mariadb:
+    image: mariadb
+    ports:
+      - '5006:3306'
+    command: --init-file /data/application/init.sql
+    volumes:
+      - ./data/init.sql:/data/application/init.sql
+    environment:
+      MYSQL_ROOT_PASSWORD: root
+      MYSQL_DATABASE: fling
+
+
+  phpmyadmin:
+    image: phpmyadmin
+    ports:
+      - 5007:80
+    depends_on:
+      - mariadb
+    environment:
+      PMA_HOST: mariadb
+      MYSQL_ROOT_PASSWORD: root
