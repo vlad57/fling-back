@@ -36,7 +36,7 @@ exports.router = (function() {
      *          200:
      *              description: Return a json with userId and token
      *              examples:
-     *                  application/json: { "userId": string, "token": string }
+     *                  application/json: { "userId": string, "token": string, "profileCompleted": boolean }
      *          500:
      *              description: When user cannot be verified in database. When there is an error with authentication in firebase. When user cannot be added in database.
      *              examples:
@@ -72,7 +72,7 @@ exports.router = (function() {
      *      summary: Authentification with oAuth
      *      responses:
      *          302:
-     *              description: Return a location to the login page on the front exemple -> "http://localhost:4200/login?userId=1&token=tontokendePuteetjaipasditmonderniermot"
+     *              description: Return a location to the login page on the front exemple -> "http://localhost:4200/login?userId=1&token=tontokendePuteetjaipasditmonderniermot&profileCompleted=false"
      *          500:
      *              description: When user cannot be verified in database. When user cannot be added in database.
      *              examples:

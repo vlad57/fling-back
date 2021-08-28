@@ -34,7 +34,7 @@ module.exports = {
       asyncLib.waterfall([
         function(done) {
           models.User.findOne({
-            attributes: ['id', 'phone', 'email',],
+            attributes: ['id', 'phone', 'email', 'profileCompleted',],
             where: { phone: phone, indicative: indicative,  isAuthPhone: true}
           })
           .then(function(userFound) {
@@ -68,7 +68,8 @@ module.exports = {
                     if (!r.additionalUserInfo.isNewUser) {
                       return res.status(200).json({
                         'userId': userFound.id,
-                        'token': jwtUtils.generateTokenForUser(userFound)
+                        'token': jwtUtils.generateTokenForUser(userFound),
+                        'profileCompleted': userFound.profileCompleted,
                       });
                     }
                 }
@@ -95,7 +96,8 @@ module.exports = {
         if (newUser) {
           return res.status(200).json({
             'userId': newUser.id,
-            'token': jwtUtils.generateTokenForUser(newUser)
+            'token': jwtUtils.generateTokenForUser(newUser),
+            'profileCompleted': newUser.profileCompleted,
           });
         } else {
           return res.status(500).json({ 'error': 'cannot add user 2' });
@@ -188,7 +190,7 @@ module.exports = {
             function(done) {
 
               models.User.findOne({
-                attributes: ['id', 'email', 'phone'],
+                attributes: ['id', 'email', 'phone', 'profileCompleted'],
                 where: { email: email, isAuthGoogle: true}
               })
               .then(function(userFound) {
@@ -215,7 +217,7 @@ module.exports = {
                 });
               } else {
 
-                res.redirect(`${process.env['FRONT_ROOT_URI']}/${process.env['FRONT_ROUTE_LOGIN']}?userId=${userFound.id}&token=${jwtUtils.generateTokenForUser(userFound)}`);
+                res.redirect(`${process.env['FRONT_ROOT_URI']}/${process.env['FRONT_ROUTE_LOGIN']}?userId=${userFound.id}&token=${jwtUtils.generateTokenForUser(userFound)}&profileCompleted=${userFound.profileCompleted}`);
 
                 /*return res.status(201).json({
                   'userId': userFound.id,
@@ -226,7 +228,7 @@ module.exports = {
   
           ], function(newUser) {
             if (newUser) {
-              res.redirect(`${process.env['FRONT_ROOT_URI']}/${process.env['FRONT_ROUTE_LOGIN']}?userId=${newUser.id}&token=${jwtUtils.generateTokenForUser(newUser)}`);
+              res.redirect(`${process.env['FRONT_ROOT_URI']}/${process.env['FRONT_ROUTE_LOGIN']}?userId=${newUser.id}&token=${jwtUtils.generateTokenForUser(newUser)}&profileCompleted=${userFound.profileCompleted}`);
               /*return res.status(201).json({
                 'userId': newUser.id,
                 'token': jwtUtils.generateTokenForUser(newUser)
